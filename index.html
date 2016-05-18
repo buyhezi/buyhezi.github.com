@@ -56,6 +56,11 @@
                 <li><a href="#ECMAScript" data-scroll>ECMAScript</a></li>
                 <li><a href="#Flux" data-scroll>Flux</a></li>
                 <li><a href="#FluxDOM" data-scroll>Flux的DOM操作</a></li>
+                <li><a href="#reduce" data-scroll>reduce</a></li>
+                <li><a href="#autocomplete" data-scroll>autocomplete</a></li>
+                <li><a href="#details" data-scroll>details</a></li>
+                <li><a href="#progress" data-scroll>progress</a></li>
+                <li><a href="#insertBefore" data-scroll>insertBefore</a></li>
             </ul>
         </nav>
     </header>
@@ -300,6 +305,211 @@
 
               var str = this.refs.input.getDOMNode().value;
         </pre>
+        <br>
+        <br>
+        <h1 id="reduce">reduce</h1>
+        <div class="childtitle"> JavaScript 数组reduce()方法同时应用一个函数针对数组的两个值(从左到右)，以减至一个值: array.reduce(callback[, initialValue]);</div>
+        <br>
+        <pre>
+            var total = [11, 20, 35, 42, 20, 48].reduce(function(a, b, c) {
+                console.log(a, b, c)
+                return a + b + c;
+            });
+
+            <span>)-->
+                11 20 1
+                32 35 2
+                69 42 3
+                114 20 4
+                138 48 5<span>
+        </pre>
+        <br>
+        <br>
+        <h1 id="datalist">datalist</h1>
+        <div class="childtitle">下拉菜单</div>
+            <input type="text" list="greetings">
+            <datalist id="greetings">
+                <option value="HTML value">HTML</option>
+                <option value="htJS value">JS</option>
+                <option value="hAndroid value">Android</option>
+            </datalist>
+        <br>
+        <br>
+        <pre>
+            < input type="text" list="greetings">
+            < datalist id="greetings">
+                < option value="HTML value">HTML< /option>
+                < option value="htJS value">JS< /option>
+                < option value="hAndroid value">Android< /option>
+            < /datalist>
+        </pre>
+        <br>
+        <h1 id="autocomplete">autocomplete</h1>
+        <div class="childtitle">双击输入框自动完成功能</div>
+            <form action="/example/html5/demo_form.asp" method="get" autocomplete="on">
+                First name:<input type="text" name="fname" /><br />
+                Last name: <input type="text" name="lname" /><br />
+                E-mail: <input type="email" name="email" autocomplete="off" /><br />
+                <input type="submit" />
+            </form>
+        <br>
+        <br>
+        <pre>
+            < form action="/example/html5/demo_form.asp" method="get" autocomplete="on">
+                First name:< input type="text" name="fname" /><br />
+                Last name: < input type="text" name="lname" /><br />
+                E-mail: < input type="email" name="email" autocomplete="off" /><br />
+                < input type="submit" />
+            < /form>
+        </pre>
+        <br>
+        <h1 id="pattern">pattern</h1>
+        <div class="childtitle">自定义正则表达式</div>
+            <form action="#">
+                <input type="text" pattern="[A-Z]{3}" name="part">
+                <input type="submit" name="" id="">
+            </form>
+        <br>
+        <br>
+        <pre>
+            < form action="#">
+                < input type="text" pattern="[A-Z]{3}" name="part">
+                < input type="submit" name="" id="">
+            < /form>
+        </pre>
+        <br>
+        <h1 id="details">details</h1>
+        <div class="childtitle">点击后展示详情</div>
+            <details id="dateil" onclick="detail_onclick(this)">
+                <summary>速度与激情</summary>
+                <p id="p" style="visibility: hidden;">你好<mark>这里</mark>是详细信息的</p>
+            </details>
+            <script>
+                function detail_onclick(detail) {
+                    var p = document.getElementById('p');
+                    if (detail.open)
+                        p.style.visibility = 'hidden';
+                    else
+                        p.style.visibility = 'visible';
+                }
+            </script>
+        <br>
+        <pre>
+            < details id="dateil" onclick="detail_onclick(this)">
+                < summary>速度与激情< /summary>
+                < p id="p" style="visibility: hidden;">你好<mark>这里</mark>是详细信息的< /p>
+            < /details>
+
+            function detail_onclick(detail) {
+                var p = document.getElementById('p');
+                if (detail.open)
+                    p.style.visibility = 'hidden';
+                else
+                    p.style.visibility = 'visible';
+            }
+        </pre>        
+        <br>
+        <h1 id="progress">progress</h1>
+        <div class="childtitle">进度条</div>
+            <div>
+                <p>
+                <button onclick="btn()">开始</button>
+                完成百分百
+                    <progress id="prog" max="100" style="background-color: #05AD3F"><span>0</span>%</progress>
+                    <meter value="56" min="0" max="100" low="10" high="90" optimum="80" id="meterid"></meter>
+                </p>
+            </div>
+            <script>
+                function btn() {
+                    var i = 0;
+
+                    function thread_one() {
+                        if (i < 100)
+                            updateProgress(i++);
+                    }
+                    setInterval(thread_one, 100);
+                }
+
+                function updateProgress(newvaleue) {
+                    var progressbar = document.getElementById("prog");
+                    progressbar.value = newvaleue;
+                    progressbar.getElementsByTagName('span')[0].textContent = newvaleue;
+                    var meterid = document.getElementById("meterid");
+                    meterid.value = newvaleue;
+                }
+            </script>
+        <br>
+        <pre>
+            < section>
+                < h2>Pregress进度条< /h2>
+                < p>完成百分百
+                    < progress id="prog" max="100" style="background-color: #05AD3F">< span>0< /span>%< /progress>
+                    < meter value="56" min="0" max="100" low="10" high="90" optimum="80" id="meterid">< /meter>
+                < /p>
+                < button onclick="btn()">开始< /button>
+            < /section>
+            < script>
+                function btn() {
+                    var i = 0;
+
+                    function thread_one() {
+                        if (i < 100)
+                            updateProgress(i++);
+                    }
+                    setInterval(thread_one, 100);
+                }
+
+                function updateProgress(newvaleue) {
+                    var progressbar = document.getElementById("prog");
+                    progressbar.value = newvaleue;
+                    progressbar.getElementsByTagName('span')[0].textContent = newvaleue;
+                    var meterid = document.getElementById("meterid");
+                    meterid.value = newvaleue;
+                }
+            < /script>
+        </pre>  
+        <br>
+        <h1 id="insertBefore">insertBefore</h1>
+        <div class="childtitle">点击后展示详情</div>
+            <form action="#insertBefore" id="checkform">
+                <input type="text" id="txt_name">
+                <button id="checkbtn" onclick="checkname()">验证</button>
+            </form>
+            <script>
+                function checkname() {
+                    var txtName = document.getElementById('txt_name');
+                    var checkbtn = document.getElementById('checkbtn');
+                    var checkform = document.getElementById('checkform');
+
+                    if (txtName.value.trim() == "") {
+                        var label = document.createElement('label');
+                        checkform.insertBefore(label, txtName);
+                        label.innerHTML = '请输入名字';
+                        label.setAttribute("style", 'color:red')
+                    }
+                }
+            </script>
+        <br>
+        <pre>
+            < form action="#" id="checkform">
+                < input type="text" id="txt_name">
+                < button id="checkbtn" onclick="checkname()">验证< /button>
+            < /form>
+            < script>
+                function checkname() {
+                    var txtName = document.getElementById('txt_name');
+                    var checkbtn = document.getElementById('checkbtn');
+                    var checkform = document.getElementById('checkform');
+
+                    if (txtName.value.trim() == "") {
+                        var label = document.createElement('label');
+                        checkform.insertBefore(label, txtName);
+                        label.innerHTML = '请输入名字';
+                        label.setAttribute("style", 'color:red')
+                    }
+                }
+            < /script>
+        </pre> 
     </div>
     <script src="js/responsive-nav.js"></script>
     <script src="js/fastclick.js"></script>
