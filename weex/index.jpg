@@ -94,7 +94,7 @@
 	})
 	});
 
-	;__weex_define__("@weex-component/5638d138d02639e919d3cff969dec909", [], function(__weex_require__, __weex_exports__, __weex_module__){
+	;__weex_define__("@weex-component/ae519c04e14e210bb3a1b982c5faafaa", [], function(__weex_require__, __weex_exports__, __weex_module__){
 	__webpack_require__(1);
 
 	;
@@ -341,7 +341,7 @@
 	                "click": "stremobj"
 	              },
 	              "attr": {
-	                "value": "破斯特"
+	                "value": "珀斯特"
 	              }
 	            },
 	            {
@@ -353,7 +353,7 @@
 	                "click": "fetchFunc"
 	              },
 	              "attr": {
-	                "value": "Fetch"
+	                "value": "飞驰"
 	              }
 	            }
 	          ]
@@ -766,7 +766,7 @@
 	  }
 	})
 	})
-	;__weex_bootstrap__("@weex-component/5638d138d02639e919d3cff969dec909", {
+	;__weex_bootstrap__("@weex-component/ae519c04e14e210bb3a1b982c5faafaa", {
 	  "transformerVersion": "0.3.1"
 	},undefined)
 
