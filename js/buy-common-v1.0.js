@@ -15,7 +15,7 @@
     //   appId: _APPID,
     //   appKey: _APPKEY
     // });
-
+    var m = {};
 
     //判断用户是否存在
     m.isExist = function(username, callback) {
@@ -43,6 +43,16 @@
         } else {
             return false;
         }
+    };
+
+    //js获取url中的参数
+    m.getQueryString = function(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
     };
 
     window.BUY = m;
