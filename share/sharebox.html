@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>商品简介</title>
+    <style>
+    html,
+    body {
+        background-color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="iteminfoid" class="goodsinfo-container">
+        <div class="goodsimg01">
+            <img v-bind:src="item.pic_url1" alt="">
+        </div>
+        <div class="goodsdes">
+            <div class="goodsurl-box" v-on:click="buythisgoods(item.goods_itemid)">
+                <div class="goodsurl-click">
+                    <div class="goods-00-title">
+                        <span>{{(item.item_title_tmp)}}</span>
+                    </div>
+                    <div class="good-00-price">
+                        <span>￥&nbsp;</span> {{item.item_price}}
+                    </div>
+                </div>
+                <div class="goodsurl-mark">
+                    <div class="goodsurl-mark-cell">
+                        <img src="../image/right_go_icon.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="goods-00-des">
+                <span>{{item.item_des}}</span>
+            </div>
+            <div class="goods-01-img">
+                <img v-bind:src="item.pic_url2">
+            </div>
+            <div class="goods-01-img">
+                <img v-bind:src="item.pic_url3">
+            </div>
+            <div class="goods-01-img">
+                <img v-bind:src="item.pic_url4">
+            </div>
+            <div class="chicken-soup">
+                {{item.chicken_soup}}
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/av-min.js"></script>
+<script type="text/javascript" src="../js/buy-common-v1.0.js"></script>
+<script type="text/javascript">
+var iteminfo = new Vue({
+    el: '#iteminfoid',
+    data: {
+        title: {
+            pic_url: "",
+            title_banner: "",
+            title_content: ""
+        },
+        item: {},
+        userid: '0',
+        showfavbtn: false,
+        isshowshare: false
+    },
+    created: function() {
+        this.getTopicInfo();
+        this.getfavorite();
+    },
+    methods: {
+        getTopicInfo: function() {
+            var topicdetail = new AV.Query('itemdetail');
+            topicdetail.equalTo('goodsid', goodsid);
+            topicdetail.find().then(function(results) {
+                // console.log(JSON.stringify(results));
+                topicinfo.updateView(results[0]);
+            }, function(error) {
+                console.log(error);
+            });
+        },
+        updateView: function(results) {
+            var item_title = results.get("item_title"),
+                item_title_tmp = item_title;
+
+            if (item_title.length > 15)
+                item_title_tmp = item_title_tmp.substring(0, 15) + '...';
+
+            //更新视图
+            var arrayObj = {
+                pic_url1: results.get("pic_url1"),
+                pic_url2: results.get("pic_url2"),
+                pic_url3: results.get("pic_url3"),
+                pic_url4: results.get("pic_url4"),
+                item_title: item_title,
+                item_title_tmp: item_title_tmp,
+                item_des: results.get("item_des"),
+                item_price: results.get("item_price"),
+                goods_pro_price: results.get("item_pro_price"),
+                goods_itemid: results.get("itemid"),
+                chicken_soup: results.get("chicken_soup"),
+                // topicD_id: results.get("goodsid")
+            };
+
+            topicinfo.item = arrayObj;
+        },
+        buythisgoods: function(itemid) {
+            console.log("itemid", itemid);
+            var param = {
+                isvcode: "buyhezi",
+                itemid: itemid, //或openid:AAHd5d-HAAeGwJedwSnHktBI
+                mmpid: _ALIMAMA_PID,
+            };
+            alibaichuan.showTaokeItemById(param, function(ret, err) {
+                if (ret) {
+                    // 付款成功
+                    // {"code":0,"message":"success"}
+                    //ret - {"message":"success","code":0} 
+                    console.log("ret - " + JSON.stringify(ret));
+                } else {
+                    console.log("err - " + JSON.stringify(err));
+                }
+            });
+        }
+    }
+});
+</script>
+
+</html>
