@@ -210,3 +210,7 @@
     color: #666;
     text-align: left;
 }
+.line-view{
+	height: 10px;
+	background-color: #f6f7f8;
+}

@@ -12,7 +12,7 @@
         margin: 0px;
         padding: 0px;
         background-color: #fff;
-        font-family:"Microsoft YaHei",微软雅黑,"MicrosoftJhengHei",华文细黑,STHeiti,MingLiu;
+        font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu;
     }
     </style>
 </head>
@@ -43,18 +43,19 @@
                 </div>
             </div>
             <div class="goods-00-des-box">
-            <div class="goods-00-des">
-                <span>{{item.item_des}}</span>
-            </div>
-            <div class="buy-to-taobao" v-on:click="openTaoPage(item.taobaourl)">
-                <div class="good-00-price">
-                    <span>￥</span>{{item.item_price}}
+                <div class="goods-00-des">
+                    <span>{{item.item_des}}</span>
                 </div>
-                <div class="buy-to-taobao-btn">
-                    <span>立即购买</span>
+                <div class="buy-to-taobao" v-on:click="openTaoPage(item.taobaourl)">
+                    <div class="good-00-price">
+                        <span>￥</span>{{item.item_price}}
+                    </div>
+                    <div class="buy-to-taobao-btn">
+                        <span>立即购买</span>
+                    </div>
                 </div>
             </div>
-            </div>
+            <div class="line-view"></div>
             <div class="goods-01-img">
                 <img v-bind:src="item.pic_url2">
             </div>
@@ -117,8 +118,8 @@ var iteminfo = new Vue({
 
             iteminfo.item = arrayObj;
         },
-        openTaoPage:function(tburl){
-            window.location.href=tburl;
+        openTaoPage: function(tburl) {
+            window.location.href = tburl;
         }
     }
 
