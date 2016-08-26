@@ -18,14 +18,14 @@
 </head>
 
 <body>
-<!-- http://openbox.mobilem.360.cn/qcms/view/t/detail?sid=3450943 -->
     <div id="iteminfoid" class="goodsinfo-container">
-        <div class="app-download-box" v-on:click="openTaoPage('http://zhushou.360.cn/detail/index/soft_id/3450943')">
+        <div class="app-download-box" v-on:click="openTaoPage('http://openbox.mobilem.360.cn/qcms/view/t/detail?sid=3450943')">
             <div class="app-img">
                 <img src="../image/bg_logo.png">
             </div>
             <div class="app-title">
                 <span>生活艺术化 艺术生活化</span>
+                <div>我们只陈列生活艺术品</div>
             </div>
             <div class="app-download">
                 <span>点击下载</span>
@@ -38,7 +38,7 @@
             <div class="goodsurl-box">
                 <div class="goodsurl-click">
                     <div class="goods-00-title">
-                        <span>{{(item.item_title)}}</span>
+                        <span>[{{(item.item_title)}}]</span>
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="buy-to-taobao" v-on:click="openTaoPage(item.taobaourl)">
                 <div class="good-00-price">
-                    <span>￥</span> {{item.item_price}}
+                    <span>￥</span>{{item.item_price}}
                 </div>
                 <div class="buy-to-taobao-btn">
                     <span>立即购买</span>
