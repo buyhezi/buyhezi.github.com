@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>白盒子艺术馆</title>
+    <link rel="stylesheet" type="text/css" href="../css/buy_share.css" />
+    <style>
+    html,
+    body {
+        margin: 0px;
+        padding: 0px;
+        background-color: #fff;
+        font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti, MingLiu;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="iteminfoid" class="goodsinfo-container">
+        <div class="app-download-box" v-on:click="openTaoPage('http://openbox.mobilem.360.cn/qcms/view/t/detail?sid=3450943')">
+            <div class="app-img">
+                <img src="../image/bg_logo.png">
+            </div>
+            <div class="app-title">
+                <span>生活艺术化 艺术生活化</span>
+                <div>我们只陈列生活艺术品</div>
+            </div>
+            <div class="app-download">
+                <span>点击下载</span>
+            </div>
+        </div>
+        <div class="goodsimg01">
+            <img v-bind:src="item.pic_url1" alt="">
+        </div>
+        <div class="goodsdes">
+            <div class="goodsurl-box">
+                <div class="goodsurl-click">
+                    <div class="goods-00-title">
+                        <span>[{{(item.item_title)}}]</span>
+                    </div>
+                </div>
+            </div>
+            <div class="goods-00-des-box">
+                <div class="goods-00-des">
+                    <span>{{item.item_des}}</span>
+                </div>
+                <div class="buy-to-taobao" v-on:click="openTaoPage(item.taobaourl)">
+                    <div class="good-00-price">
+                        <span>￥</span>{{item.item_price}}
+                    </div>
+                    <div class="buy-to-taobao-btn">
+                        <span>立即购买</span>
+                    </div>
+                </div>
+            </div>
+            <div class="line-view"></div>
+            <div class="goods-01-img">
+                <img v-bind:src="item.pic_url2">
+            </div>
+            <div class="goods-01-img">
+                <img v-bind:src="item.pic_url3">
+            </div>
+            <div class="goods-01-img">
+                <img v-bind:src="item.pic_url4">
+            </div>
+            <div class="chicken-soup">
+                {{item.chicken_soup}}
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/av-min.js"></script>
+<script type="text/javascript" src="../js/buy-common-v1.0.js"></script>
+<script type="text/javascript">
+console.log("id = ", BUY.getQueryString("id"));
+
+var iteminfo = new Vue({
+    el: '#iteminfoid',
+    data: {
+        goodsid: "",
+        item: []
+    },
+    created: function() {
+        this.goodsid = BUY.getQueryString("id");
+        this.getItemInfo();
+    },
+    methods: {
+        getItemInfo: function() {
+            var topicdetail = new AV.Query('itemdetail');
+            topicdetail.equalTo('goodsid', this.goodsid);
+            topicdetail.find().then(function(results) {
+                // console.log(JSON.stringify(results));
+                iteminfo.updateView(results[0]);
+            }, function(error) {
+                console.log(error);
+            });
+        },
+        updateView: function(results) {
+            //更新视图
+            var arrayObj = {
+                pic_url1: results.get("pic_url1"),
+                pic_url2: results.get("pic_url2"),
+                pic_url3: results.get("pic_url3"),
+                pic_url4: results.get("pic_url4"),
+                item_title: results.get("item_title"),
+                taobaourl: results.get("taobaourl"),
+                item_des: results.get("item_des"),
+                item_price: results.get("item_price"),
+                goods_pro_price: results.get("item_pro_price"),
+                goods_itemid: results.get("itemid"),
+                chicken_soup: results.get("chicken_soup"),
+                // topicD_id: results.get("goodsid")
+            };
+
+            iteminfo.item = arrayObj;
+        },
+        openTaoPage: function(tburl) {
+            window.location.href = tburl;
+        }
+    }
+
+});
+</script>
+
+</html>
